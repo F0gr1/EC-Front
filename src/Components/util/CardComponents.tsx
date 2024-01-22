@@ -1,15 +1,44 @@
-import { AccountBookOutlined , PlusOutlined } from '@ant-design/icons';
-import { Avatar, Card } from 'antd';
-import React from 'react';
+// CardComponent.tsx
+
+import React, { useState } from 'react';
+import { AccountBookOutlined, PlusOutlined } from '@ant-design/icons';
+import { Avatar, Button, Card, Modal } from 'antd';
 import { ProductItemsModel } from '../../model/ProductItems';
+import styled from 'styled-components';
+
 const { Meta } = Card;
 
+const CustomCard = styled(Card)`
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+  }
 
+  &:active {
+    transform: scale(0.95);
+    transition: transform 0.2s ease-in-out;
+  }
+`;
 
-// 波括弧を使用して Props の型を指定
 const CardComponent: React.FC<{ product: ProductItemsModel }> = ({ product }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const handlePurchase = () => {
+    // 購入ボタンがクリックされたときの処理を追加
+   alert(`商品「${product.name}」を購入しました。`);
+    setIsModalVisible(false); // モーダルを閉じる
+  };
+
   return (
-    <Card
+    <CustomCard
       hoverable
       cover={
         <img
@@ -18,17 +47,35 @@ const CardComponent: React.FC<{ product: ProductItemsModel }> = ({ product }) =>
         />
       }
       actions={[
-        <AccountBookOutlined key="buy" />,
+        <AccountBookOutlined key="buy" onClick={showModal} />,
         <PlusOutlined key="add" />,
       ]}
     >
       <Meta
         avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
-        title={`${product.name} - ${product.price}円`}  // 商品名と価格を表示
-        description={product.description}  // product のプロパティを使用
-
+        title={`${product.name} - ${product.price}円`}
+        description={product.description}
       />
-    </Card>
+
+      {/* モーダルの内容 */}
+      <Modal title="購入内容" visible={isModalVisible} onCancel={handleCancel} footer={[
+          <Button key="cancel" onClick={handleCancel}>
+            キャンセル
+          </Button>,
+          <Button key="purchase" type="primary" onClick={handlePurchase}>
+            購入
+          </Button>,
+        ]}
+      >
+      <img
+          alt="example"
+          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+        />
+        <p>商品名: {product.name}</p>
+        <p>価格: {product.price}円</p>
+       
+      </Modal>
+    </CustomCard>
   );
 };
 
