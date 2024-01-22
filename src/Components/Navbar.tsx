@@ -5,24 +5,24 @@ import Product from '../dev/Product'
 import styled from 'styled-components'
 import Home from '../dev/Home'
 
-const Navbar = () => {
-  const Nav = styled.nav`
+const Nav = styled.nav`
   
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-    align-items: center;
-    gap: 10%;
-    height:50px;
-    background-color: #b0c4de;
+display: flex;
+flex-direction: row;
+justify-content:center;
+align-items: center;
+gap: 10%;
+height:50px;
+background-color: #b0c4de;
 
-    &  a{
-      text-decoration:none;
-      color: #444;
-      font-size:16px;
-      font-weight:600
-    }
-  `;
+&  a{
+  text-decoration:none;
+  color: #444;
+  font-size:16px;
+  font-weight:600
+}
+`;
+const Navbar = () => {
   return (
     <div>
       <BrowserRouter>
