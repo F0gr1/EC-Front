@@ -8,7 +8,7 @@ const CardComponent = () => {
     <Card
     hoverable
     
-    style={{ width: 300 }}
+    style={{ width: 330 }}
     cover={
       <img
         alt="example"
@@ -23,8 +23,8 @@ const CardComponent = () => {
   >
     <Meta
       avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
-      title="Card title"
-      description="This is the description"
+      title="本物の熊"
+      description="実家の熊"
     />
   </Card>
   )

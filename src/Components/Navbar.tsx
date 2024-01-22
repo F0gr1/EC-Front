@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
 import Login from '../dev/Login'
 import Product from '../dev/Product'
 import styled from 'styled-components'
+import Home from '../dev/Home'
 
 const Navbar = () => {
   const Nav = styled.nav`
@@ -27,12 +28,11 @@ const Navbar = () => {
       <BrowserRouter>
           <Nav>
             <Link to="/">Home</Link>
-
-            <Link to="/login">login</Link>
-
             <Link to="/product">product</Link>
+            <Link to="/login">login</Link>
           </Nav>
         <Routes>
+          <Route path='/' element={<Home/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/product" element={<Product />} />
         </Routes>
