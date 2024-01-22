@@ -6,28 +6,27 @@ import styled from 'styled-components'
 import Home from '../dev/Home'
 
 const Nav = styled.nav`
-  
-display: flex;
-flex-direction: row;
-justify-content:center;
-align-items: center;
-gap: 10%;
-height:50px;
-background-color: #b0c4de;
-
-&  a{
-  text-decoration:none;
-  color: #444;
-  font-size:16px;
-  font-weight:600
-}
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color: #b0c4de;
+  padding:0 2%;
+  & a {
+    text-decoration: none;
+    color: #444;
+    font-size: 16px;
+    font-weight: 600;
+  }
 `;
+
 const Navbar = () => {
   return (
     <div>
       <BrowserRouter>
           <Nav>
-            <Link to="/">Home</Link>
+            <Link to="/"><span>ペンギンストア</span></Link>
             <Link to="/product">product</Link>
             <Link to="/login">login</Link>
           </Nav>

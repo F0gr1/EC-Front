@@ -1,4 +1,4 @@
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { AccountBookOutlined , PlusOutlined } from '@ant-design/icons';
 import { Avatar, Card } from 'antd';
 import React from 'react';
 import { ProductItemsModel } from '../../model/ProductItems';
@@ -18,9 +18,8 @@ const CardComponent: React.FC<{ product: ProductItemsModel }> = ({ product }) =>
         />
       }
       actions={[
-        <SettingOutlined key="setting" />,
-        <EditOutlined key="edit" />,
-        <EllipsisOutlined key="ellipsis" />,
+        <AccountBookOutlined key="buy" />,
+        <PlusOutlined key="add" />,
       ]}
     >
       <Meta

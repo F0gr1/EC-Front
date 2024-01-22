@@ -7,7 +7,7 @@ const Home = () => {
     display:flex;
     flex-direction:column;
     justify-content:center;
-    margin: 12%;
+    margin: 12% 0;
     font-size:36px;
     color:#EEE;
     text-align: center;
