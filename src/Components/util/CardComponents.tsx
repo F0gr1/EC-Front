@@ -1,11 +1,11 @@
 // CardComponent.tsx
 
-import React, { useState } from 'react';
+import React from 'react';
 import { AccountBookOutlined, PlusOutlined } from '@ant-design/icons';
-import { Avatar, Button, Card, Modal } from 'antd';
+import { Avatar,  Card, } from 'antd';
 import { ProductItemsModel } from '../../model/ProductItems';
 import styled from 'styled-components';
-
+import { useNavigate } from 'react-router-dom';
 const { Meta } = Card;
 
 const CustomCard = styled(Card)`
@@ -21,61 +21,49 @@ const CustomCard = styled(Card)`
 `;
 
 const CardComponent: React.FC<{ product: ProductItemsModel }> = ({ product }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
+  const navigate = useNavigate();
+  const imagePath = 'http://localhost/storage/images/anpanman.jpg';
+  const handleClick = (product: ProductItemsModel) => {
+    // 商品カードがクリックされたら詳細ページに遷移し、商品データを渡す
+    navigate(`/product/${product.id}`, { state: { productData: product } });
   };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  const handlePurchase = () => {
-    // 購入ボタンがクリックされたときの処理を追加
-   alert(`商品「${product.name}」を購入しました。`);
-    setIsModalVisible(false); // モーダルを閉じる
-  };
-
   return (
-    <CustomCard
-      hoverable
-      cover={
-        <img
-          alt="example"
-          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-        />
-      }
-      actions={[
-        <AccountBookOutlined key="buy" onClick={showModal} />,
-        <PlusOutlined key="add" />,
-      ]}
-    >
-      <Meta
-        avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
-        title={`${product.name} - ${product.price}円`}
-        description={product.description}
-      />
+  <div>
+    {product.sold_at ?(
+         <CustomCard
+         hoverable
+         cover={
+          <img src={imagePath} alt="Uploaded Image" />
+         }
+         className="bg-gray-500"
+       >
+          <Meta
+            avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
+            title={`Sold ${product.name} - ${product.price}円`}
+            description={product.description}
+          />
+        </CustomCard>
 
-      {/* モーダルの内容 */}
-      <Modal title="購入内容" visible={isModalVisible} onCancel={handleCancel} footer={[
-          <Button key="cancel" onClick={handleCancel}>
-            キャンセル
-          </Button>,
-          <Button key="purchase" type="primary" onClick={handlePurchase}>
-            購入
-          </Button>,
+    ):(
+   <CustomCard
+        hoverable
+        cover={
+          <img src={imagePath} alt="Uploaded Image" />
+        }
+        actions={[
+          <AccountBookOutlined key="buy" onClick={() => handleClick(product)} />,
+          <PlusOutlined key="add" />,
         ]}
       >
-      <img
-          alt="example"
-          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+        <Meta
+          avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
+          title={`${product.name} - ${product.price}円`}
+          description={product.description}
         />
-        <p>商品名: {product.name}</p>
-        <p>価格: {product.price}円</p>
-       
-      </Modal>
     </CustomCard>
+    )}
+    
+  </div>    
   );
 };
 
