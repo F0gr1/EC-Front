@@ -20,14 +20,11 @@ const Product = () => {
     const fetchProductData = async() =>{
       try{
         const response = await fetch('http://localhost/products');
-        
-        if(!response.ok){
-          throw new Error('Error');
-        }
-
         const result = await response.json();
-        const resultProducts = JSON.parse(result);
-        setProducts(resultProducts);
+        if(result){
+          const resultProducts = JSON.parse(result);  
+          setProducts(resultProducts);
+        }
       }catch(error:any){
         setError(error);
       }
@@ -38,16 +35,18 @@ const Product = () => {
     return <div>Error: {error}</div>;
   }
 
-  if (!products) {
+  if (products.length === 0) {
     return <div>Loading...</div>;
   }
   return (
     <ProductContainer>
-      {products && products.map((product: ProductItemsModel) =>{
-          return (
-            <CardComponent product = {product}/>
-          )
-      })}
+      {products && products.length > 0 ? (
+    products.map((product: ProductItemsModel) => (
+      <CardComponent product={product} key={product.id} />
+      ))
+    ) : (
+      <p>No products available</p>
+    )}
     </ProductContainer>
   )
 }

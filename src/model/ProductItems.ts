@@ -3,4 +3,5 @@ export type ProductItemsModel = {
   name: string;
   price : number;
   description: string;
+  sold_at: Date;
 };
