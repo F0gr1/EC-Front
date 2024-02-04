@@ -4,6 +4,7 @@ import Login from '../dev/Login'
 import Product from '../dev/Product'
 import styled from 'styled-components'
 import Home from '../dev/Home'
+import ProductPage from '../dev/ProductPage'
 
 const Nav = styled.nav`
   display: flex;
@@ -34,6 +35,7 @@ const Navbar = () => {
           <Route path='/' element={<Home/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/product/:productId" element={<ProductPage />} />
         </Routes>
       </BrowserRouter>
     </div>
